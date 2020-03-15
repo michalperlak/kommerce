@@ -1,23 +1,28 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin("jvm") version "1.3.70"
+    base
+    kotlin("jvm") version "1.3.61" apply false
 }
 
-group = "com.github.kommerce"
-version = "0.0.1-SNAPSHOT"
+allprojects {
+    group = "com.github.kommerce"
+    version = "0.0.1-SNAPSHOT"
 
-repositories {
-    mavenCentral()
+    repositories {
+        mavenCentral()
+    }
 }
 
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-}
-
-tasks {
-    compileKotlin {
+subprojects {
+    tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
     }
 }
