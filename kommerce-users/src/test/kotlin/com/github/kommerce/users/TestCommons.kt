@@ -1,3 +1,3 @@
 package com.github.kommerce.users
 
-fun createUsersModule(): UsersModule = TODO()
+fun createUsersModule(): UsersModule = DefaultUsersModule(InMemoryUsersRepository())

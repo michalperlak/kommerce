@@ -15,5 +15,7 @@ data class UserId(
                 val uuid = UUID.fromString(id)
                 UserId(uuid)
             }
+
+        fun generate(): UserId = UserId(UUID.randomUUID())
     }
 }
