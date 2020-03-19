@@ -19,7 +19,7 @@ internal class DefaultUsersModule(
     override fun getUser(id: String): Option<UserDto> =
         UserId.from(id)
             .toOption()
-            .flatMap { usersRepository.get(it) }
+            .flatMap { usersRepository.getById(it) }
             .map { it.toDto() }
 
     override fun addUser(user: NewUserDto): Either<UserCreationError, UserDto> =
@@ -28,12 +28,12 @@ internal class DefaultUsersModule(
             .mapLeft { UserCreationError.EMAIL_NOT_VALID }
             .flatMap { checkIfEmailAlreadyTaken(it) }
             .map { User(id = UserId.generate(), email = it) }
-            .map { usersRepository.save(it) }
+            .map { usersRepository.add(it) }
             .map { it.toDto() }
 
     private fun checkIfEmailAlreadyTaken(email: Email): Either<UserCreationError, Email> =
         usersRepository
-            .findByEmail(email)
+            .findOneBy(email) { it.email }
             .toEither { email }
             .swap()
             .mapLeft { UserCreationError.EMAIL_ALREADY_USED }

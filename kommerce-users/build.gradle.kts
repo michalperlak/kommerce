@@ -7,6 +7,7 @@ val commonsValidatorVersion: String by project
 val junitVersion: String by project
 
 dependencies {
+    implementation(project(":kommerce-common"))
     implementation(kotlin("stdlib-jdk8"))
     implementation("io.arrow-kt", "arrow-core", arrowVersion)
     implementation("commons-validator", "commons-validator", commonsValidatorVersion)
