@@ -8,8 +8,7 @@ import java.nio.file.Path
 class AiromemRepository<ID : Any, T : Identifiable<ID>>(
     path: Path
 ) : Repository<ID, T>, AutoCloseable {
-    private val persistent: Persistent<Repository<ID, T>> =
-        Persistent.loadOptional(path) { InMemoryRepository() }
+    private val persistent = Persistent.loadOptional(path) { InMemoryRepository<ID, T>() }
 
     override fun getById(id: ID): Option<T> =
         persistent.query { repo -> repo.getById(id) }
