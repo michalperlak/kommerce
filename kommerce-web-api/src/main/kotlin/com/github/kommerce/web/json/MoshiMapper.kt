@@ -1,6 +1,7 @@
 package com.github.kommerce.web.json
 
 import arrow.core.Either
+import com.github.kommerce.web.error.ParseError
 import com.github.kommerce.users.utils.of
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Moshi.Builder
@@ -14,7 +15,7 @@ class MoshiMapper(
             val adapter = moshi.adapter(targetClass)
             adapter
                 .fromJson(value)
-                ?: throw RuntimeException("Cannot extract ${targetClass.name} instance from value: $value")
+                ?: throw ParseError("Cannot extract ${targetClass.name} instance from value: $value")
         }
 
     override fun <T : Any> write(value: T): String {

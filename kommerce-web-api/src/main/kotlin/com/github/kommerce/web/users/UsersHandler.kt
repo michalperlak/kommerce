@@ -61,7 +61,7 @@ class UsersHandler(
                 status = HttpResponseStatus.BAD_REQUEST,
                 headers = jsonContentType(),
                 body = Option.just(
-                    error("Error parsing creation request: ${throwable.message ?: "PARSE_ERROR"}")
+                    error("Error parsing creation request: ${throwable.message ?: "UNKNOWN_ERROR"}")
                 )
             )
         )
