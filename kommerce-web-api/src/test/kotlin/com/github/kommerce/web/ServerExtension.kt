@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 
 internal class ServerExtension : BeforeAllCallback, AfterAllCallback {
-    private val server: ApiServer = TODO()
+    private val server: ApiServer = configureServer(TEST_PORT)
 
     override fun beforeAll(context: ExtensionContext) {
         val serverThread = Thread {
