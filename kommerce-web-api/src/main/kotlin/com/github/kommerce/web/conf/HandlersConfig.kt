@@ -9,7 +9,7 @@ import com.github.kommerce.web.users.UsersHandler
 object HandlersConfig {
     private val jsonMapper: JsonMapper = MoshiMapper()
 
-    fun handlers(): Array<ApiHandler> = arrayOf(
+    fun handlers(): List<ApiHandler> = listOf(
         usersHandler()
     )
 

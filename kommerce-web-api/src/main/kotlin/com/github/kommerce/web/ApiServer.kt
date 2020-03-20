@@ -28,7 +28,7 @@ class ApiServer private constructor(
     companion object {
         const val DEFAULT_PORT = 9090
 
-        fun create(port: Int, vararg handlers: ApiHandler): ApiServer =
+        fun create(port: Int, handlers: List<ApiHandler>): ApiServer =
             ApiServer(
                 HttpServer
                     .create()
