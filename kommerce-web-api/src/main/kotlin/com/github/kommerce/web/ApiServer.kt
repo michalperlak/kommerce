@@ -26,9 +26,9 @@ class ApiServer private constructor(
     private fun serverStarted(): Boolean = ::disposableServer.isInitialized
 
     companion object {
-        private const val DEFAULT_PORT = 9090
+        const val DEFAULT_PORT = 9090
 
-        fun create(port: Int = DEFAULT_PORT, vararg handlers: ApiHandler): ApiServer =
+        fun create(port: Int, vararg handlers: ApiHandler): ApiServer =
             ApiServer(
                 HttpServer
                     .create()
