@@ -12,6 +12,7 @@ val reactorNettyVersion: String by project
 val moshiVersion: String by project
 
 val junitVersion: String by project
+val restAssuredVersion: String by project
 
 dependencies {
     kapt("com.squareup.moshi", "moshi-kotlin-codegen", moshiVersion)
@@ -24,6 +25,7 @@ dependencies {
     implementation("com.squareup.moshi", "moshi", moshiVersion)
 
     testImplementation("org.junit.jupiter", "junit-jupiter", junitVersion)
+    testImplementation("io.rest-assured", "kotlin-extensions", restAssuredVersion)
 }
 
 val mainClass = "com.github.kommerce.KommerceWebApplicationKt"
