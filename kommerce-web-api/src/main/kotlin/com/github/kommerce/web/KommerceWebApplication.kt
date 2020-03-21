@@ -8,5 +8,6 @@ fun configureServer(port: Int = DEFAULT_PORT): ApiServer =
     create(port, HandlersConfig.handlers())
 
 fun main() {
-    configureServer().start()
+    configureServer()
+        .startAndBlock()
 }

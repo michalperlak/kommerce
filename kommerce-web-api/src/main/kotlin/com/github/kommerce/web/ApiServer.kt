@@ -16,6 +16,12 @@ class ApiServer private constructor(
         if (serverStarted()) disposableServer
         else server.bindNow()
 
+    fun startAndBlock() {
+        start()
+            .onDispose()
+            .block()
+    }
+
     @Synchronized
     fun stop() {
         if (serverStarted() && !disposableServer.isDisposed) {
