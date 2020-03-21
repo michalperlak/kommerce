@@ -4,6 +4,7 @@ plugins {
 
 val arrowVersion: String by project
 val airomemVersion: String by project
+
 val junitVersion: String by project
 
 dependencies {

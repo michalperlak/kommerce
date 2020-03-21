@@ -2,11 +2,12 @@ package com.github.kommerce.users.domain
 
 import arrow.core.Either
 import com.github.kommerce.users.utils.of
+import java.io.Serializable
 import java.util.*
 
 data class UserId(
     private val uuid: UUID
-) {
+): Serializable {
     override fun toString(): String = uuid.toString()
 
     companion object {

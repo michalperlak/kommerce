@@ -1,8 +1,9 @@
 package com.github.kommerce.web.json
 
 import arrow.core.Either
-import com.github.kommerce.web.error.ParseError
 import com.github.kommerce.users.utils.of
+import com.github.kommerce.web.error.ParseError
+import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Moshi.Builder
 
@@ -19,7 +20,14 @@ class MoshiMapper(
         }
 
     override fun <T : Any> write(value: T): String {
-        val adapter = moshi.adapter(value.javaClass)
+        val adapter = getAdapter(value.javaClass)
         return adapter.toJson(value)
     }
+
+    private fun <T : Any> getAdapter(type: Class<T>): JsonAdapter<T> =
+        when {
+            Collection::class.java.isAssignableFrom(type) -> moshi.adapter<T>(Object::class.java)
+            Map::class.java.isAssignableFrom(type) -> moshi.adapter<T>(Object::class.java)
+            else -> moshi.adapter(type)
+        }
 }

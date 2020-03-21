@@ -1,3 +1,18 @@
 package com.github.kommerce.users
 
-fun createUsersModule(): UsersModule = DefaultUsersModule(InMemoryUsersRepository())
+import arrow.core.getOrHandle
+import com.github.kommerce.users.dto.NewUserDto
+import com.github.kommerce.users.dto.UserDto
+import com.github.kommerce.users.repo.AiromemUsersRepo
+import java.nio.file.Files
+
+fun createUsersModule(): UsersModule = DefaultUsersModule(
+    AiromemUsersRepo(Files.createTempDirectory("users"))
+)
+
+fun addUser(email: String, usersModule: UsersModule): UserDto {
+    val newUser = NewUserDto(email)
+    return usersModule
+        .addUser(newUser)
+        .getOrHandle { throw IllegalStateException("Expected user but was: $it") }
+}

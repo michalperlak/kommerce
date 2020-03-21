@@ -1,6 +1,7 @@
 package com.github.kommerce.web.users
 
 import arrow.core.Option
+import arrow.core.getOrElse
 import arrow.core.getOrHandle
 import com.github.kommerce.users.UsersModule
 import com.github.kommerce.users.dto.NewUserDto
@@ -24,7 +25,43 @@ class UsersHandler(
 ) : ApiHandler {
 
     override fun invoke(routes: HttpServerRoutes): HttpServerRoutes =
-        routes.post(CREATE_USER_PATH, this::createUser)
+        routes
+            .post(BASE_USERS_PATH, this::createUser)
+            .get(BASE_USERS_PATH) { _, response -> getAllUsers(response) }
+            .get(GET_USER_PATH, this::getUser)
+
+    private fun getAllUsers(response: HttpServerResponse): Mono<Void> =
+        Mono
+            .just(usersModule.getAllUsers())
+            .map {
+                ResponseSpec(
+                    status = HttpResponseStatus.OK,
+                    headers = jsonContentType(),
+                    body = Option.just(mapper.write(it))
+                )
+            }
+            .flatMap { it.applyAndSend(response) }
+
+    private fun getUser(request: HttpServerRequest, response: HttpServerResponse): Mono<Void> =
+        Mono
+            .just(
+                Option
+                    .fromNullable(request.param("userId"))
+                    .flatMap { usersModule.getUser(it) }
+                    .map {
+                        ResponseSpec(
+                            status = HttpResponseStatus.OK,
+                            headers = jsonContentType(),
+                            body = Option.just(mapper.write(it))
+                        )
+                    }
+                    .getOrElse {
+                        ResponseSpec(
+                            status = HttpResponseStatus.NOT_FOUND
+                        )
+                    }
+            )
+            .flatMap { it.applyAndSend(response) }
 
     private fun createUser(request: HttpServerRequest, response: HttpServerResponse): Mono<Void> =
         request
@@ -71,6 +108,6 @@ class UsersHandler(
 
     companion object {
         private const val BASE_USERS_PATH = "/api/users"
-        private const val CREATE_USER_PATH = BASE_USERS_PATH
+        private const val GET_USER_PATH = "$BASE_USERS_PATH/{userId}"
     }
 }

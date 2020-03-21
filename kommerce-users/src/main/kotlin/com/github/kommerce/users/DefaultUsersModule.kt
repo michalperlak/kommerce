@@ -31,6 +31,11 @@ internal class DefaultUsersModule(
             .map { usersRepository.add(it) }
             .map { it.toDto() }
 
+    override fun getAllUsers(): List<UserDto> =
+        usersRepository
+            .getAllUsers()
+            .map { it.toDto() }
+
     private fun checkIfEmailAlreadyTaken(email: Email): Either<UserCreationError, Email> =
         usersRepository
             .getByEmail(email)

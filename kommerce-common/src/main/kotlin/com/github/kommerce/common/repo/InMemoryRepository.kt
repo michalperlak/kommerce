@@ -12,6 +12,8 @@ class InMemoryRepository<ID : Any, T : Identifiable<ID>> : Repository<ID, T> {
 
     override fun add(value: T): T = value.apply { entries[id] = this }
 
+    override fun getAll(): List<T> = entries.values.toList()
+
     override fun <A : Any> findBy(value: A, extractor: (T) -> A): List<T> =
         entries
             .values

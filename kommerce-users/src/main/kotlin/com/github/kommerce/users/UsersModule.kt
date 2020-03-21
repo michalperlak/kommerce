@@ -10,6 +10,7 @@ import com.github.kommerce.users.repo.AiromemUsersRepo
 interface UsersModule {
     fun getUser(id: String): Option<UserDto>
     fun addUser(user: NewUserDto): Either<UserCreationError, UserDto>
+    fun getAllUsers(): List<UserDto>
 
     companion object {
         fun default(): UsersModule = DefaultUsersModule(AiromemUsersRepo())
