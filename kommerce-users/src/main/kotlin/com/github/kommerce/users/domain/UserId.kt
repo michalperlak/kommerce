@@ -7,10 +7,12 @@ import java.util.*
 
 data class UserId(
     private val uuid: UUID
-): Serializable {
+) : Serializable {
     override fun toString(): String = uuid.toString()
 
     companion object {
+        private const val serialVersionUID: Long = 1
+
         fun from(id: String): Either<Throwable, UserId> =
             Either.of {
                 val uuid = UUID.fromString(id)

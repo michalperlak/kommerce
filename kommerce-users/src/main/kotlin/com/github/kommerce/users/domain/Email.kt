@@ -11,6 +11,8 @@ data class Email internal constructor(
     override fun toString(): String = email
 
     companion object {
+        private const val serialVersionUID: Long = 1
+
         fun parse(email: String): Either<Throwable, Email> =
             Either.of {
                 val valid = EmailValidator

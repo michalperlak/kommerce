@@ -6,4 +6,9 @@ import java.io.Serializable
 data class User(
     override val id: UserId,
     val email: Email
-) : Identifiable<UserId>, Serializable
+) : Identifiable<UserId>, Serializable {
+
+    companion object {
+        private const val serialVersionUID: Long = 1
+    }
+}

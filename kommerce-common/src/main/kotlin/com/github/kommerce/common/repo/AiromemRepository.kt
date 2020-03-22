@@ -34,4 +34,8 @@ class AiromemRepository<ID : Serializable, T>(
 
     override fun deleteAll() =
         persistent.execute { repo -> repo.deleteAll() }
+
+    companion object {
+        private const val serialVersionUID: Long = 1
+    }
 }

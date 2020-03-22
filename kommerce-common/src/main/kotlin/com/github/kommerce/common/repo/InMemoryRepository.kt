@@ -29,4 +29,8 @@ class InMemoryRepository<ID : Any, T : Identifiable<ID>> : Repository<ID, T> {
     override fun deleteAll() {
         entries.clear()
     }
+
+    companion object {
+        private const val serialVersionUID: Long = 1
+    }
 }
