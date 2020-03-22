@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm")
     kotlin("kapt")
+    jacoco
 }
 
 val arrowVersion: String by project

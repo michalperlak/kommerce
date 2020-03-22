@@ -5,6 +5,7 @@ plugins {
     kotlin("jvm")
     kotlin("kapt")
     id("com.github.johnrengelman.shadow") version "5.2.0"
+    jacoco
 }
 
 val arrowVersion: String by project
