@@ -78,6 +78,7 @@ task<JacocoReport>("jacocoRootReport") {
     reports {
         xml.isEnabled = true
         html.isEnabled = true
+        xml.destination = file("${buildDir}/reports/jacoco/report.xml")
         html.destination = file("${buildDir}/reports/jacoco/html")
     }
 }
