@@ -4,6 +4,7 @@ plugins {
     base
     kotlin("jvm") version "1.3.70" apply false
     jacoco
+    id("com.github.kt3k.coveralls") version "2.8.4"
 }
 
 allprojects {
@@ -76,6 +77,7 @@ task<JacocoReport>("jacocoRootReport") {
         include("**/build/jacoco/test.exec")
     })
     reports {
+        xml.isEnabled = true
         html.isEnabled = true
         html.destination = file("${buildDir}/reports/jacoco/html")
     }
