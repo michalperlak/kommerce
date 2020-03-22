@@ -9,7 +9,7 @@ script:
   - ./gradlew build
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -f "*jacocoRootReport.xml"
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
