@@ -10,4 +10,5 @@ interface Repository<ID : Any, T : Identifiable<ID>> : Serializable {
     fun getAll(): List<T>
     fun <A : Any> findBy(value: A, extractor: (T) -> A): List<T>
     fun <A : Any> findOneBy(value: A, extractor: (T) -> A): Option<T>
+    fun deleteAll()
 }

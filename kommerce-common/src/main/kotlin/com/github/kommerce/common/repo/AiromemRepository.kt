@@ -31,4 +31,7 @@ class AiromemRepository<ID : Serializable, T>(
 
     override fun <A : Any> findOneBy(value: A, extractor: (T) -> A): Option<T> =
         persistent.query { repo -> repo.findOneBy(value, extractor) }
+
+    override fun deleteAll() =
+        persistent.execute { repo -> repo.deleteAll() }
 }

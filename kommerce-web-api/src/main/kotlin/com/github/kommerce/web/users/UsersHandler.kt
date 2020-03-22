@@ -107,7 +107,7 @@ class UsersHandler(
         mapper.write(ErrorMessage(message))
 
     companion object {
-        private const val BASE_USERS_PATH = "/api/users"
-        private const val GET_USER_PATH = "$BASE_USERS_PATH/{userId}"
+        const val BASE_USERS_PATH = "/api/users"
+        const val GET_USER_PATH = "$BASE_USERS_PATH/{userId}"
     }
 }

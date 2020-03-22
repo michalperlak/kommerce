@@ -36,6 +36,10 @@ internal class DefaultUsersModule(
             .getAllUsers()
             .map { it.toDto() }
 
+    override fun reset() {
+        usersRepository.deleteAll()
+    }
+
     private fun checkIfEmailAlreadyTaken(email: Email): Either<UserCreationError, Email> =
         usersRepository
             .getByEmail(email)

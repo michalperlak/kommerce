@@ -25,4 +25,8 @@ class InMemoryRepository<ID : Any, T : Identifiable<ID>> : Repository<ID, T> {
                 .values
                 .firstOrNull { value == extractor(it) }
         )
+
+    override fun deleteAll() {
+        entries.clear()
+    }
 }

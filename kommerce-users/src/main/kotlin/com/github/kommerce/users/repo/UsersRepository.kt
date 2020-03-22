@@ -10,4 +10,5 @@ interface UsersRepository {
     fun getByEmail(email: Email): Option<User>
     fun add(newUser: User): User
     fun getAllUsers(): List<User>
+    fun deleteAll()
 }

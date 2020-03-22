@@ -1,11 +1,11 @@
 package com.github.kommerce.web
 
-import com.github.kommerce.web.ApiServer.Companion.DEFAULT_PORT
 import com.github.kommerce.web.ApiServer.Companion.create
-import com.github.kommerce.web.conf.HandlersConfig
+import com.github.kommerce.web.conf.ApiServerConfig
+import com.github.kommerce.web.conf.ApiServerConfig.Companion.DEFAULT_PORT
 
 fun configureServer(port: Int = DEFAULT_PORT): ApiServer =
-    create(port, HandlersConfig.handlers())
+    create(ApiServerConfig(port))
 
 fun main() {
     configureServer()

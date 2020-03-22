@@ -1,5 +1,6 @@
 package com.github.kommerce.web
 
+import com.github.kommerce.web.conf.ApiServerConfig
 import reactor.netty.DisposableServer
 import reactor.netty.http.server.HttpServer
 import reactor.netty.http.server.HttpServerRoutes
@@ -32,15 +33,15 @@ class ApiServer private constructor(
     private fun serverStarted(): Boolean = ::disposableServer.isInitialized
 
     companion object {
-        const val DEFAULT_PORT = 9090
-
-        fun create(port: Int, handlers: List<ApiHandler>): ApiServer =
+        fun create(config: ApiServerConfig): ApiServer =
             ApiServer(
                 HttpServer
                     .create()
-                    .port(port)
+                    .port(config.port)
                     .route {
-                        handlers.fold(it) { routes, handler -> handler(routes) }
+                        config
+                            .handlers()
+                            .fold(it) { routes, handler -> handler(routes) }
                     }
             )
     }

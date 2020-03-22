@@ -18,4 +18,6 @@ class AiromemUsersRepo(path: Path = Paths.get("data/users")) : UsersRepository {
     override fun add(newUser: User): User = repository.add(newUser)
 
     override fun getAllUsers(): List<User> = repository.getAll()
+
+    override fun deleteAll() = repository.deleteAll()
 }
