@@ -14,8 +14,12 @@ class ApiServer private constructor(
 
     @Synchronized
     fun start(): DisposableServer =
-        if (serverStarted()) disposableServer
-        else server.bindNow()
+        if (!serverStarted()) {
+            disposableServer = server.bindNow()
+            disposableServer
+        } else {
+            disposableServer
+        }
 
     fun startAndBlock() {
         start()
@@ -26,7 +30,7 @@ class ApiServer private constructor(
     @Synchronized
     fun stop() {
         if (serverStarted() && !disposableServer.isDisposed) {
-            disposableServer.dispose()
+            disposableServer.disposeNow()
         }
     }
 

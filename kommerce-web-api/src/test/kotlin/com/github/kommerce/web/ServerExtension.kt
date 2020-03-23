@@ -11,8 +11,9 @@ internal class ServerExtension : BeforeAllCallback, AfterAllCallback, BeforeEach
     private val server: ApiServer = ApiServer.create(config)
 
     override fun beforeAll(context: ExtensionContext) {
-        val serverThread = Thread { server.startAndBlock() }
+        val serverThread = Thread({ server.startAndBlock() }, "api-server-thread")
         serverThread.start()
+        Thread.sleep(500)
     }
 
     override fun afterAll(context: ExtensionContext) = server.stop()
