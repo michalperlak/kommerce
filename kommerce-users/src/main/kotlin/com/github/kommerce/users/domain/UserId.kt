@@ -5,7 +5,7 @@ import com.github.kommerce.users.utils.of
 import java.io.Serializable
 import java.util.*
 
-data class UserId(
+data class UserId internal constructor(
     private val uuid: UUID
 ) : Serializable {
     override fun toString(): String = uuid.toString()
