@@ -39,7 +39,7 @@ internal class GetUserTest {
         // given
         val email = "test@test.com"
         val usersModule = createUsersModule()
-        val user = addUser(email, usersModule)
+        val user = addUser(email, "", usersModule)
 
         // when
         val result = usersModule.getUser(user.id)

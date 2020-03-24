@@ -8,8 +8,8 @@ import java.nio.file.Files
 fun createUsersModule(): UsersModule =
     UsersModule.default(usersPath = Files.createTempDirectory("users"))
 
-fun addUser(email: String, usersModule: UsersModule): UserDto {
-    val newUser = NewUserDto(email, "")
+fun addUser(email: String, password: String, usersModule: UsersModule): UserDto {
+    val newUser = NewUserDto(email, password)
     return usersModule
         .addUser(newUser)
         .getOrHandle { throw IllegalStateException("Expected user but was: $it") }
