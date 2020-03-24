@@ -19,7 +19,7 @@ internal class AddUserTest {
             port(TEST_PORT)
             body(
                 """
-                    { "email": "test@example.com" }
+                    { "email": "test@example.com", "password": "abcd" }
                 """.trimIndent()
             )
         } When {
@@ -36,7 +36,7 @@ internal class AddUserTest {
             port(TEST_PORT)
             body(
                 """
-                    { "email": "test" }
+                    { "email": "test", "password": "abc" }
                 """.trimIndent()
             )
         } When {
@@ -54,7 +54,7 @@ internal class AddUserTest {
             addUser("test@example.com")
             body(
                 """
-                    { "email": "test@example.com" }
+                    { "email": "test@example.com", "password": "abc" }
                 """.trimIndent()
             )
         } When {

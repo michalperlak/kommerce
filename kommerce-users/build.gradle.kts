@@ -21,7 +21,7 @@ dependencies {
     implementation("commons-validator", "commons-validator", commonsValidatorVersion)
     implementation("com.squareup.moshi", "moshi", moshiVersion)
     implementation("com.auth0", "java-jwt", jwtVersion)
-    implementation("jbcrypt","jbcrypt", jbcryptVersion)
+    implementation("org.mindrot","jbcrypt", jbcryptVersion)
 
     testImplementation("org.junit.jupiter", "junit-jupiter", junitVersion)
 }

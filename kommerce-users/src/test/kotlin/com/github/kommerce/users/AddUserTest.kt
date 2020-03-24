@@ -13,7 +13,8 @@ internal class AddUserTest {
     fun `should return user data when user successfully added`() {
         // given
         val email = "test@test.com"
-        val userToAdd = NewUserDto(email)
+        val password = "1234"
+        val userToAdd = NewUserDto(email, password)
         val usersModule = createUsersModule()
 
         // when
@@ -29,7 +30,8 @@ internal class AddUserTest {
     fun `should return error when email address not valid`() {
         // given
         val invalidEmail = "test"
-        val userToAdd = NewUserDto(invalidEmail)
+        val password = "1234"
+        val userToAdd = NewUserDto(invalidEmail, password)
         val usersModule = createUsersModule()
 
         // when
@@ -43,7 +45,8 @@ internal class AddUserTest {
     fun `should return error when email address already used`() {
         // given
         val email = "test@test.com"
-        val userToAdd = NewUserDto(email)
+        val password = "1234"
+        val userToAdd = NewUserDto(email, password)
         val usersModule = createUsersModule()
         usersModule.addUser(userToAdd)
 

@@ -5,10 +5,11 @@ import com.github.kommerce.users.dto.NewUserDto
 import com.github.kommerce.users.dto.UserDto
 import java.nio.file.Files
 
-fun createUsersModule(): UsersModule = UsersModule.default(Files.createTempDirectory("users"))
+fun createUsersModule(): UsersModule =
+    UsersModule.default(usersPath = Files.createTempDirectory("users"))
 
 fun addUser(email: String, usersModule: UsersModule): UserDto {
-    val newUser = NewUserDto(email)
+    val newUser = NewUserDto(email, "")
     return usersModule
         .addUser(newUser)
         .getOrHandle { throw IllegalStateException("Expected user but was: $it") }

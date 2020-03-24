@@ -5,7 +5,8 @@ import java.io.Serializable
 
 data class User(
     override val id: UserId,
-    val email: Email
+    val email: Email,
+    val password: Password
 ) : Identifiable<UserId>, Serializable {
 
     companion object {

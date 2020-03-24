@@ -12,6 +12,7 @@ import com.github.kommerce.users.repo.InMemorySessionsRepo
 import com.github.kommerce.users.service.UsersService
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.time.Clock
 
 interface UsersModule : Module {
     fun getUser(id: String): Option<UserDto>
@@ -20,10 +21,11 @@ interface UsersModule : Module {
     fun login(email: String, password: String): Option<SessionDto>
 
     companion object {
-        fun default(usersPath: Path = Paths.get("data/users")): UsersModule {
+        fun default(clock: Clock = Clock.systemUTC(),
+                    usersPath: Path = Paths.get("data/users")): UsersModule {
             val usersRepo = AiromemUsersRepo(usersPath)
-            val usersService = UsersService(usersRepo)
             val sessionsRepo = InMemorySessionsRepo()
+            val usersService = UsersService(clock, usersRepo, sessionsRepo)
             return DefaultUsersModule(usersRepo, usersService, sessionsRepo)
         }
     }

@@ -4,6 +4,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class SessionDto(
-    val id: String,
+    val token: String,
     val expires: Long
 )

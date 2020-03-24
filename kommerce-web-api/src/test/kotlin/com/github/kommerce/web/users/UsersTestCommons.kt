@@ -9,7 +9,7 @@ import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.When
 
 fun addUser(email: String): String {
-    val newUser = NewUserDto(email = email)
+    val newUser = NewUserDto(email = email, password = "")
     val mapper = MoshiMapper()
     val location = Given {
         port(TEST_PORT)
