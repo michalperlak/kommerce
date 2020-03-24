@@ -8,7 +8,7 @@ import com.github.kommerce.users.domain.UserId
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class AiromemUsersRepo(path: Path = Paths.get("data/users")) : UsersRepository {
+class AiromemUsersRepo(path: Path) : UsersRepository {
     private val repository = AiromemRepository<UserId, User>(path)
 
     override fun getUser(id: UserId): Option<User> = repository.getById(id)
